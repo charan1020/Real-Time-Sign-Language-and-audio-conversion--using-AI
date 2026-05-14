@@ -1,0 +1,18 @@
+[build]
+  command = "python build_netlify_static.py"
+  publish = "dist"
+
+[[redirects]]
+  from = "/audio_sign/"
+  to = "/userhome/"
+  status = 302
+
+[[redirects]]
+  from = "/sign_audio/"
+  to = "/userhome/"
+  status = 302
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
