@@ -57,6 +57,20 @@ from django.http import HttpResponse
 
 
 import os
+import subprocess
+import sys
+
+
+BLOGS_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BLOGS_DIR)
+
+
+def run_script(script_path):
+    subprocess.Popen(
+        [sys.executable, script_path],
+        cwd=PROJECT_ROOT,
+        creationflags=subprocess.CREATE_NEW_CONSOLE if os.name == "nt" else 0,
+    )
 
 
 def homepage(request):
@@ -77,20 +91,12 @@ def login(request):
 
 
 def audio_sign(request):
-    os.system("python ./blogs/main2.py")
-    return HttpResponse("Audio to Sign Executed")
+    run_script(os.path.join(BLOGS_DIR, "main2.py"))
+    return render(request, "userhome.html", {"msg": "Audio to Sign started. Use the popup window to continue."})
 
 def sign_audio(request):
-    import os
-    import sys
-
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(current_dir)
-    script_path = os.path.join(project_root, "detect_gesture.py")
-
-    os.system(f'"{sys.executable}" "{script_path}"')
-
-    return HttpResponse("Sign to Audio Executed")
+    run_script(os.path.join(PROJECT_ROOT, "detect_gesture.py"))
+    return render(request, "userhome.html", {"msg": "Sign to Audio started. Use the camera window to continue."})
 
 
 def userhome(request):

@@ -92,6 +92,25 @@
     <!-- end slider section -->
   </div>
 
+  <section class="service_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>Conversion Tools</h2>
+      </div>
+      {% if msg %}
+      <h4 style="color: green; text-align: center;">{{ msg }}</h4>
+      {% endif %}
+      <div class="row" style="justify-content: center; gap: 20px;">
+        <div class="col-md-4">
+          <a class="btn btn-primary btn-block" href="{% url 'audio_sign' %}">Audio to Sign</a>
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-primary btn-block" href="{% url 'sign_audio' %}">Sign to Audio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 
 
